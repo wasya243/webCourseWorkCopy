@@ -1,3 +1,7 @@
+// It is common regex for validation of firstName, lastName, address .etc
+const commonRegex = /(^[_,.]|[!@#$%^&*()?":{}|<>])/;
+const commonValidator = (value) => !commonRegex.test(value);
+
 const validators = {
     email: {
         validator: (value) => {
@@ -11,6 +15,18 @@ const validators = {
             return value.length >= 6 && value.length <= 15;
         },
         errorMessage: `Invalid password length. Minimum length is 6. Maximum length is 15`
+    },
+    firstName: {
+        validator: commonValidator,
+        errorMessage: `Invalid name format. Name cannot contain special characters.`
+    },
+    lastName: {
+        validator: commonValidator,
+        errorMessage: `Invalid name format. Last name cannot contain special characters.`
+    },
+    address: {
+        validator: commonValidator,
+        errorMessage: `Invalid name format. Address cannot contain special characters.`
     }
 };
 
