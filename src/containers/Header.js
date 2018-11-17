@@ -44,6 +44,9 @@ export default class Header extends Component {
                                 <DropdownItem>
                                     <Link to="/log-in">Авторизация</Link>
                                 </DropdownItem>
+                                <DropdownItem>
+                                    <Link to="/">Главная</Link>
+                                </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
                     </Nav>
