@@ -58,7 +58,7 @@ export default class Login extends Component {
             <Container>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
-                        <Label for="exampleEmail">Email</Label>
+                        <Label for="exampleEmail">E-mail</Label>
                         <Input
                             valid={email.className === 'has-success'}
                             invalid={email.className === 'has-danger'}
@@ -73,13 +73,13 @@ export default class Login extends Component {
                         </FormFeedback>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="examplePassword">Password</Label>
+                        <Label for="examplePassword">Пароль</Label>
                         <Input
                             valid={password.className === 'has-success'}
                             invalid={password.className === 'has-danger'}
                             type="password"
                             name="password"
-                            placeholder="enter password here"
+                            placeholder="Введите ваш пароль..."
                             onChange={this.handleChange}
                             value={this.state.password}
                         />
