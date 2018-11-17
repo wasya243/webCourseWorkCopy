@@ -7,7 +7,12 @@ export default class SignUp extends Component {
 
         this.state = {
             email: "",
-            password: ""
+            firstName: "",
+            lastName: "",
+            address: "",
+            password: "",
+            confirmPassword: ""
+
         };
     }
 
@@ -17,7 +22,7 @@ export default class SignUp extends Component {
 
     handleChange = event => {
         this.setState({
-            [event.target.id]: event.target.value
+            [event.target.name]: event.target.value
         });
     };
 
@@ -59,16 +64,6 @@ export default class SignUp extends Component {
                             placeholder="Для инофрмирования о заказе"
                             onChange={this.handleChange}
                             value={this.state.email}
-                        />
-                    </FormGroup>
-                    <FormGroup inline>
-                        <Label for="phone">Фамилия</Label>
-                        <Input
-                            type="text"
-                            name="phone"
-                            placeholder="Для инофрмирования о заказе"
-                            onChange={this.handleChange}
-                            value={this.state.phone}
                         />
                     </FormGroup>
                 </fieldset>

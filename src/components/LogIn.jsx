@@ -17,7 +17,7 @@ export default class Login extends Component {
 
     handleChange = event => {
         this.setState({
-            [event.target.id]: event.target.value
+            [event.target.name]: event.target.value
         });
     };
 
@@ -34,7 +34,6 @@ export default class Login extends Component {
                     <Input
                         type="email"
                         name="email"
-                        id="email"
                         placeholder="your@email.com"
                         onChange={this.handleChange}
                         value={this.state.email}
@@ -45,7 +44,6 @@ export default class Login extends Component {
                     <Input
                         type="password"
                         name="password"
-                        id="password"
                         placeholder="enter password here"
                         onChange={this.handleChange}
                         value={this.state.password}
