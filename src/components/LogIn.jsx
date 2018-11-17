@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {Button, FormGroup, Form, Label, Input} from 'reactstrap';
+import {Button, FormGroup, Form, Label, Input, Container, FormFeedback} from 'reactstrap';
+
+import validation from '../lib/validation';
 
 export default class Login extends Component {
     constructor(props) {
@@ -7,18 +9,36 @@ export default class Login extends Component {
 
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            validation: {
+                email: {
+                    valid: null,
+                    className: ""
+                },
+                password: {
+                    valid: null,
+                    className: ""
+                }
+            }
         };
     }
 
     validateForm() {
-        return this.state.email.length > 0 && this.state.password.length > 0;
+        return validation.validateForm(this.state.validation);
     }
 
     handleChange = event => {
+        const { validateInput } = validation;
+        const { value, name } = event.target;
+        const toSet = validateInput(value, validation.validators[name].validator);
         this.setState({
-            [event.target.name]: event.target.value
+            [name]: value,
+            validation: {
+                ...this.state.validation,
+                [name]: toSet
+            }
         });
+
     };
 
     handleSubmit = (event) => {
@@ -27,30 +47,49 @@ export default class Login extends Component {
     };
 
     render() {
+        const {
+            email: {errorMessage: emailErrorMessage},
+            password: {errorMessage: passwordErrorMessage}
+        } = validation.validators;
+
+        const {email, password} = this.state.validation;
+
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                    <Label for="exampleEmail">Email</Label>
-                    <Input
-                        type="email"
-                        name="email"
-                        placeholder="your@email.com"
-                        onChange={this.handleChange}
-                        value={this.state.email}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="examplePassword">Password</Label>
-                    <Input
-                        type="password"
-                        name="password"
-                        placeholder="enter password here"
-                        onChange={this.handleChange}
-                        value={this.state.password}
-                    />
-                </FormGroup>
-                <Button disabled={!this.validateForm()} type="submit">Submit</Button>
-            </Form>
+            <Container>
+                <Form onSubmit={this.handleSubmit}>
+                    <FormGroup>
+                        <Label for="exampleEmail">Email</Label>
+                        <Input
+                            valid={email.className === 'has-success'}
+                            invalid={email.className === 'has-danger'}
+                            type="email"
+                            name="email"
+                            placeholder="your@email.com"
+                            onChange={this.handleChange}
+                            value={this.state.email}
+                        />
+                        <FormFeedback invalid>
+                            {emailErrorMessage}
+                        </FormFeedback>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="examplePassword">Password</Label>
+                        <Input
+                            valid={password.className === 'has-success'}
+                            invalid={password.className === 'has-danger'}
+                            type="password"
+                            name="password"
+                            placeholder="enter password here"
+                            onChange={this.handleChange}
+                            value={this.state.password}
+                        />
+                        <FormFeedback invalid>
+                            {passwordErrorMessage}
+                        </FormFeedback>
+                    </FormGroup>
+                    <Button disabled={!this.validateForm()} type="submit">Submit</Button>
+                </Form>
+            </Container>
         );
     }
 }
