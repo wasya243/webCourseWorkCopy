@@ -1,11 +1,12 @@
 import React from 'react';
-import { Card, Image, Icon, Button } from 'semantic-ui-react';
+import {Card, Image, Icon, Button} from 'semantic-ui-react';
 
-const DrugCard = drug => {
-  const { name, manufacturer, price, url } = drug;
+const DrugCard = (drug) => {
+  const {name, manufacturer, price, url} = drug;
+
   return (
     <Card>
-      <Image src={url} />
+      <Image src={url}/>
       <Card.Content>
         <Card.Header>{name}</Card.Header>
         <Card.Meta>
@@ -14,7 +15,7 @@ const DrugCard = drug => {
       </Card.Content>
       <Card.Content extra>
         <a>
-          <Icon name="rub" />
+          <Icon name="rub"/>
           {price}
         </a>
       </Card.Content>
