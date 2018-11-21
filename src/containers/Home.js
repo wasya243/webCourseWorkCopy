@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Card, Container} from 'semantic-ui-react';
 
 import DrugCard from '../components/DrugCard';
+import DrugsList from '../components/DrugsList';
 import {drugsActions, cartActions} from '../actions';
 
 class Home extends Component {
@@ -22,10 +23,10 @@ class Home extends Component {
         <Card.Group itemsPerRow={4}>
           {isPending
             ? 'Загрузка...'
-            : listOfDrugs.map((drug, i) => <DrugCard key={i} drug={drug} addToCart={() => this.onAddToCart(drug)}/>)}
+            : <DrugsList listOfDrugs={listOfDrugs} onAddToCart={this.onAddToCart}/>
+          }
         </Card.Group>
       </Container>
-
     );
   }
 }
