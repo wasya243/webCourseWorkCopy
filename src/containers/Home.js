@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Card, Container} from 'semantic-ui-react';
 
-import DrugCard from '../components/DrugCard';
 import DrugsList from '../components/DrugsList';
 import {drugsActions, cartActions} from '../actions';
 
