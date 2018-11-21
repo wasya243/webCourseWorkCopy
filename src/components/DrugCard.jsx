@@ -1,7 +1,8 @@
 import React from 'react';
 import {Card, Image, Icon, Button} from 'semantic-ui-react';
 
-const DrugCard = (drug) => {
+const DrugCard = ({drug, addToCart}) => {
+
   const {name, manufacturer, price, url} = drug;
 
   return (
@@ -19,7 +20,7 @@ const DrugCard = (drug) => {
           {price}
         </a>
       </Card.Content>
-      <Button>
+      <Button onClick={addToCart}>
         Добавить в корзину
       </Button>
     </Card>
