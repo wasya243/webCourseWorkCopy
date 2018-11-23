@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
-import CartCard from './CartCard';
+import CartList from './CartList';
 
 class ModalExample extends React.Component {
   constructor(props) {
@@ -31,9 +31,7 @@ class ModalExample extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Корзина</ModalHeader>
           <ModalBody>
-            {
-              items.map((drug, i) => <CartCard key={i} drug={drug} removeFromCart={removeFromCart}/>)
-            }
+            <CartList listOfDrugs={items} removeFromCart={removeFromCart}/>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Оформление покупки</Button>{' '}
