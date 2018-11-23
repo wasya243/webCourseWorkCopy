@@ -14,6 +14,10 @@ import {
   NavLink
 } from 'reactstrap';
 
+import {cartActions} from '../actions';
+
+import ModalExample from '../components/CartModal';
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -29,9 +33,13 @@ class Header extends Component {
     });
   };
 
+  removeFromCart = (drugToRemove) => {
+    this.props.removeFromCart(drugToRemove)
+  };
+
   render() {
     const {isOpened} = this.state;
-    const {totalSum} = this.props;
+    const {totalSum, items} = this.props;
 
     return (
       <Navbar color="light" light expand="md">
@@ -40,7 +48,12 @@ class Header extends Component {
           <Nav className="ml-auto" navbar>
             <NavItem>
               <NavLink>
-                <p>Общая сумма: {totalSum}</p>
+                <ModalExample
+                  cartSize={items.length}
+                  items={items}
+                  totalSum={totalSum}
+                  removeFromCart={this.removeFromCart}
+                />
               </NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
@@ -68,8 +81,15 @@ class Header extends Component {
 
 const mapStateToProps = ({cart}) => {
   return ({
-    totalSum: cart.totalSum
+    totalSum: cart.totalSum,
+    items: cart.items
   });
 };
 
-export default connect(mapStateToProps, null)(Header);
+const mapDispatchToProps = (dispatch) => {
+  return ({
+    removeFromCart: cartActions.removeFromCart(dispatch)
+  })
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

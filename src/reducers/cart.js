@@ -32,6 +32,27 @@ export default (state = initialState, action) => {
     const {isPending} = action.payload;
     state = {...state, isPending};
 
+  } else if (type === `${CART_CONSTANTS.REMOVE_FROM_CART}/${SHARED_CONSTANTS.REQUEST}`) {
+
+    const {isPending} = action.payload;
+    state = {...state, isPending};
+
+  } else if (type === `${CART_CONSTANTS.REMOVE_FROM_CART}/${SHARED_CONSTANTS.SUCCESS}`) {
+
+    const {isPending, drugToRemove} = action.payload;
+
+    state = {
+      ...state,
+      isPending,
+      items: state.items.filter(drug => drug.id !== drugToRemove.id),
+      totalSum: state.totalSum - drugToRemove.price
+    }
+
+  } else if (type === `${CART_CONSTANTS.REMOVE_FROM_CART}/${SHARED_CONSTANTS.FAILURE}`) {
+
+    const {isPending} = action.payload;
+    state = {...state, isPending};
+
   }
 
   return state;
