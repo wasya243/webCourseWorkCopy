@@ -3,7 +3,7 @@ import axios from 'axios';
 import {SHARED_CONSTANTS} from '../constants';
 import {DRUGS_CONSTANTS} from '../constants';
 
-export const fetchDrugs = (dispatch) => async () => {
+const fetchDrugs = (dispatch) => async () => {
   try {
     dispatch({
       type: `${DRUGS_CONSTANTS.GET_DRUGS}/${SHARED_CONSTANTS.REQUEST}`,

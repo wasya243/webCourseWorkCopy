@@ -48,7 +48,8 @@ class ModalExample extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button id="TooltipExample" color="primary" onClick={this.toggleModal}>Оформление покупки</Button>{' '}
-            <Tooltip placement="top-end" isOpen={this.state.toolTip} target="TooltipExample" toggle={this.toggleToolTip}>
+            <Tooltip placement="top-end" isOpen={this.state.toolTip} target="TooltipExample"
+                     toggle={this.toggleToolTip}>
               Только авторизированные пользователи могу совершать покупки
             </Tooltip>
             <Button color="secondary" onClick={this.toggleModal}>Продолжить покупки</Button>

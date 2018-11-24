@@ -1,7 +1,7 @@
 import {SHARED_CONSTANTS} from '../constants';
 import {CART_CONSTANTS} from '../constants';
 
-export const addToCart = (dispatch) => async (drugToAdd) => {
+const addToCart = (dispatch) => async (drugToAdd) => {
   try {
     dispatch({
       type: `${CART_CONSTANTS.ADD_TO_CART}/${SHARED_CONSTANTS.REQUEST}`,
@@ -22,7 +22,7 @@ export const addToCart = (dispatch) => async (drugToAdd) => {
   }
 };
 
-export const removeFromCart = (dispatch) => async (drugToRemove) => {
+const removeFromCart = (dispatch) => async (drugToRemove) => {
   try {
     dispatch({
       type: `${CART_CONSTANTS.REMOVE_FROM_CART}/${SHARED_CONSTANTS.REQUEST}`,
