@@ -1,7 +1,7 @@
 import {SHARED_CONSTANTS} from '../constants';
 import {USER_CONSTANTS} from '../constants';
 
-const logIn = (dispatch) => async ({email, password}) => {
+const logIn = (dispatch) => async (email, password) => {
   try {
     dispatch({
       type: `${USER_CONSTANTS.SIGN_IN}/${SHARED_CONSTANTS.REQUEST}`,
@@ -10,9 +10,8 @@ const logIn = (dispatch) => async ({email, password}) => {
 
     // TODO make call to the backend
     const {firstName, lastName, address} = await simulateLogin(email, password);
-
     dispatch({
-      type: `${USER_CONSTANTS.SIGN_IN}/${SHARED_CONSTANTS.FAILURE}`,
+      type: `${USER_CONSTANTS.SIGN_IN}/${SHARED_CONSTANTS.SUCCESS}`,
       payload: {isPending: false, isLoggedIn: true, firstName, lastName, email, address}
     });
 
