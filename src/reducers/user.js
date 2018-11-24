@@ -28,6 +28,29 @@ export default (state = initialState, action) => {
     const {isPending, isLoggedIn} = action.payload;
     state = {...state, isPending, isLoggedIn};
 
+  } else if (type === `${USER_CONSTANTS.LOG_OUT}/${SHARED_CONSTANTS.REQUEST}`) {
+
+    const {isPending, isLoggedIn} = action.payload;
+    state = {...state, isPending, isLoggedIn};
+
+  } else if (type === `${USER_CONSTANTS.LOG_OUT}/${SHARED_CONSTANTS.SUCCESS}`) {
+
+    const {isPending, isLoggedIn} = action.payload;
+    state = {
+      ...state, isPending, isLoggedIn,
+      userInfo: {
+        firstName: null,
+        lastName: null,
+        email: null,
+        address: null
+      }
+    };
+
+  } else if (type === `${USER_CONSTANTS.LOG_OUT}/${SHARED_CONSTANTS.FAILURE}`) {
+
+    const {isPending, isLoggedIn} = action.payload;
+    state = {...state, isPending, isLoggedIn};
+
   }
 
   return state;

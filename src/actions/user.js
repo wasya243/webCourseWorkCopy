@@ -24,6 +24,30 @@ const logIn = (dispatch) => async ({email, password}) => {
   }
 };
 
+const logOut = (dispatch) => async ({email}) => {
+  try {
+    dispatch({
+      type: `${USER_CONSTANTS.LOG_OUT}/${SHARED_CONSTANTS.REQUEST}`,
+      payload: {isPending: true, isLoggedIn: true}
+    });
+
+    // TODO make call to the backend
+
+    await simulateLogout(email);
+
+    dispatch({
+      type: `${USER_CONSTANTS.LOG_OUT}/${SHARED_CONSTANTS.SUCCESS}`,
+      payload: {isPending: false, isLoggedIn: false}
+    });
+
+  } catch (error) {
+    dispatch({
+      type: `${USER_CONSTANTS.LOG_OUT}/${SHARED_CONSTANTS.FAILURE}`,
+      payload: {isPending: false, isLoggedIn: true}
+    });
+  }
+};
+
 function simulateLogin(email, password) {
   return new Promise((resolve, reject) => {
     resolve({
@@ -35,6 +59,13 @@ function simulateLogin(email, password) {
   });
 }
 
+function simulateLogout(email) {
+  return new Promise((resolve, reject) => {
+    resolve();
+  });
+}
+
 export const userActions = {
-  logIn
+  logIn,
+  logOut
 };
