@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Tooltip} from 'reactstrap';
 
 import CartList from './CartList';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -8,15 +9,23 @@ class ModalExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      toolTip: false
     };
 
-    this.toggle = this.toggle.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleToolTip = this.toggleToolTip.bind(this);
   }
 
-  toggle() {
+  toggleModal() {
     this.setState({
       modal: !this.state.modal
+    });
+  }
+
+  toggleToolTip() {
+    this.setState({
+      toolTip: !this.state.toolTip
     });
   }
 
@@ -28,18 +37,21 @@ class ModalExample extends React.Component {
     return (
       <div>
         <div>
-          <FontAwesomeIcon className="mr-2 pointer" icon="shopping-cart" onClick={this.toggle}/>
+          <FontAwesomeIcon className="mr-2 pointer" icon="shopping-cart" onClick={this.toggleModal}/>
           <span className="mr-2">Товаров: <b>{cartSize}</b></span>
           <span>Общая сумма: <b>{roundedTotalSum}</b></span>
         </div>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Корзина</ModalHeader>
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+          <ModalHeader toggle={this.toggleModal}>Корзина</ModalHeader>
           <ModalBody>
             <CartList listOfDrugs={items} removeFromCart={removeFromCart}/>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Оформление покупки</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Продолжить покупки</Button>
+            <Button id="TooltipExample" color="primary" onClick={this.toggleModal}>Оформление покупки</Button>{' '}
+            <Tooltip placement="top-end" isOpen={this.state.toolTip} target="TooltipExample" toggle={this.toggleToolTip}>
+              Только авторизированные пользователи могу совершать покупки
+            </Tooltip>
+            <Button color="secondary" onClick={this.toggleModal}>Продолжить покупки</Button>
           </ModalFooter>
         </Modal>
       </div>
