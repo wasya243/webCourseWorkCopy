@@ -49,11 +49,11 @@ class Header extends Component {
             <NavItem>
               <NavLink>
                 <ModalExample
-                  cartSize={items.length}
-                  items={items}
-                  totalSum={totalSum}
-                  removeFromCart={this.removeFromCart}
-                />
+                cartSize={items.length}
+                items={items}
+                totalSum={totalSum}
+                removeFromCart={this.removeFromCart}
+              />
               </NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>

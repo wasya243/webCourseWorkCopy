@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 import CartList from './CartList';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 class ModalExample extends React.Component {
   constructor(props) {
@@ -25,9 +26,11 @@ class ModalExample extends React.Component {
 
     return (
       <div>
-        <p>Товаров: {cartSize}</p>
-        <p>Общая сумма: {totalSum}</p>
-        <Button color="danger" onClick={this.toggle}>Корзина</Button>
+        <div>
+          <FontAwesomeIcon className="mr-2 pointer" icon="shopping-cart" onClick={this.toggle}/>
+          <span className="mr-2">Товаров: <b>{cartSize}</b></span>
+          <span>Общая сумма: <b>{totalSum}</b></span>
+        </div>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Корзина</ModalHeader>
           <ModalBody>

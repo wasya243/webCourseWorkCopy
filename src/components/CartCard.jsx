@@ -4,11 +4,11 @@ import {Image} from 'semantic-ui-react';
 
 const CartCard = (props) => {
 
-  const {drug, removeFromCart} = props;
+  const {drug, removeFromCart, divider} = props;
 
   return (
     <Container>
-      <Row>
+      <Row className={divider ? "mb-2" : "mb-0"}>
         <Col md="3"><Image src={drug.url}/></Col>
         <Col md="5">{drug.name}</Col>
         <Col md="2">{drug.price}</Col>
