@@ -12,7 +12,8 @@ const CartList = ({listOfDrugs, removeFromCart}) => {
       drug={drug}
       removeFromCart={removeFromCart}
       divider={i < length - 1}
-    />)
+    />
+    )
   );
 };
 

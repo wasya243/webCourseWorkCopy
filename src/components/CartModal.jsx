@@ -23,13 +23,14 @@ class ModalExample extends React.Component {
   render() {
 
     const {cartSize, totalSum, items, removeFromCart} = this.props;
+    const roundedTotalSum = Number(totalSum).toFixed(2);
 
     return (
       <div>
         <div>
           <FontAwesomeIcon className="mr-2 pointer" icon="shopping-cart" onClick={this.toggle}/>
           <span className="mr-2">Товаров: <b>{cartSize}</b></span>
-          <span>Общая сумма: <b>{totalSum}</b></span>
+          <span>Общая сумма: <b>{roundedTotalSum}</b></span>
         </div>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Корзина</ModalHeader>
