@@ -3,11 +3,11 @@ import {Card, Image, Icon, Button} from 'semantic-ui-react';
 
 const DrugCard = ({drug, addToCart}) => {
 
-  const {name, manufacturer, price, url} = drug;
+  const {name, manufacturer, price, logoUrl} = drug;
 
   return (
     <Card>
-      <Image src={url}/>
+      <Image src={logoUrl}/>
       <Card.Content>
         <Card.Header>{name}</Card.Header>
         <Card.Meta>

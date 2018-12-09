@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Card, Container} from 'semantic-ui-react';
+import Loader from 'react-loader-spinner'
 
 import DrugsList from '../components/DrugsList';
 import {drugsActions, cartActions} from '../actions';
@@ -21,7 +22,7 @@ class Home extends Component {
       <Container>
         <Card.Group itemsPerRow={4}>
           {isPending
-            ? 'Загрузка...'
+            ? <Loader type="Circles" color="#00BFFF" height="100" width="100"/>
             : <DrugsList listOfDrugs={listOfDrugs} onAddToCart={this.onAddToCart}/>
           }
         </Card.Group>

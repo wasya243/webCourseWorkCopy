@@ -27,7 +27,7 @@ function _delete(id) {
 function getById(id) {
   const requestOptions = {
     method: 'GET',
-    header: authHeader()
+    headers: authHeader()
   };
 
   return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
@@ -36,7 +36,7 @@ function getById(id) {
 function getAll() {
   const requestOptions = {
     method: 'GET',
-    header: authHeader()
+    headers: authHeader()
   };
 
   return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);

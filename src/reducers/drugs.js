@@ -2,7 +2,7 @@ import {SHARED_CONSTANTS} from '../constants';
 import {DRUGS_CONSTANTS} from '../constants';
 
 const initialState = {
-  isPending: false,
+  isPending: true,
   items: [],
 };
 

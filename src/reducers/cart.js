@@ -2,7 +2,7 @@ import {SHARED_CONSTANTS} from '../constants';
 import {CART_CONSTANTS} from '../constants';
 
 const initialState = {
-  isPending: false,
+  isPending: true,
   items: [],
   totalSum: 0
 };
