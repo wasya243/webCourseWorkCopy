@@ -3,6 +3,7 @@ import {USER_CONSTANTS} from '../constants';
 
 import {userService} from "../_services";
 import {history} from '../_helpers';
+import {alertActions} from "./alert";
 
 const logIn = (dispatch) => async (email, password) => {
   try {
@@ -24,7 +25,8 @@ const logIn = (dispatch) => async (email, password) => {
     dispatch({
       type: `${USER_CONSTANTS.SIGN_IN}/${SHARED_CONSTANTS.FAILURE}`,
       payload: {isPending: false, isLoggedIn: false}
-    })
+    });
+    dispatch(alertActions.error(error.toString()));
   }
 };
 
@@ -48,6 +50,7 @@ const logOut = (dispatch) => async () => {
       type: `${USER_CONSTANTS.LOG_OUT}/${SHARED_CONSTANTS.FAILURE}`,
       payload: {isPending: false, isLoggedIn: true}
     });
+    dispatch(alertActions.error(error.toString()));
   }
 };
 
@@ -71,6 +74,7 @@ const signUp = (dispatch) => async (user) => {
       type: `${USER_CONSTANTS.SIGN_UP}/${SHARED_CONSTANTS.FAILURE}`,
       payload: {isPending: false}
     });
+    dispatch(alertActions.error(error.toString()));
   }
 };
 

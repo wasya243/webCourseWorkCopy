@@ -63,13 +63,15 @@ function register(user) {
 }
 
 function logout() {
-  // remove user from local storage to log user out
-  localStorage.removeItem('user');
+  // remove persisted data from local storage
+  localStorage.removeItem('persist:root');
+  console.log(authHeader());
   const requestOptions = {
     method: 'POST',
     headers: {...authHeader(), 'Content-Type': 'application/json'},
   };
-
+  // remove user from local storage to log user out
+  localStorage.removeItem('user');
   return fetch(`${config.apiUrl}/auth/sign-out`, requestOptions).then(handleResponse);
 }
 
@@ -92,7 +94,7 @@ function login(email, password) {
       }
 
       return user;
-    })
+    });
 }
 
 function handleResponse(response) {
