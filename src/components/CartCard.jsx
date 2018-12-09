@@ -10,7 +10,7 @@ const CartCard = (props) => {
   return (
     <Container>
       <Row className={divider ? 'mb-2' : 'mb-0'}>
-        <Col md="3"><Image src={drug.url}/></Col>
+        <Col md="3"><Image src={drug.logoUrl}/></Col>
         <Col md="5">{drug.name}</Col>
         <Col md="2" className="d-flex"><Icon name="rub"/>&nbsp;{drug.price}</Col>
         <Col md="2"><Button onClick={() => removeFromCart(drug)}>X</Button></Col>
