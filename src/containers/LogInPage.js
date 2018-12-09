@@ -8,7 +8,6 @@ class LogInPage extends Component {
 
   onLogin = async (email, password) => {
     await this.props.logIn(email, password);
-    // TODO: navigation to main page
   };
 
   render() {

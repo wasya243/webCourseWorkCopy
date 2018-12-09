@@ -1,6 +1,9 @@
 import {SHARED_CONSTANTS} from '../constants';
 import {USER_CONSTANTS} from '../constants';
 
+import {userService} from "../_services";
+import {history} from '../_helpers';
+
 const logIn = (dispatch) => async (email, password) => {
   try {
     dispatch({
@@ -8,13 +11,15 @@ const logIn = (dispatch) => async (email, password) => {
       payload: {isPending: true, isLoggedIn: false}
     });
 
-    // TODO make call to the backend
-    const {firstName, lastName, address} = await simulateLogin(email, password);
+    const {userInfo} = await userService.login(email, password);
+    const {firstName, lastName, address, phoneNumber} = userInfo;
+
     dispatch({
       type: `${USER_CONSTANTS.SIGN_IN}/${SHARED_CONSTANTS.SUCCESS}`,
-      payload: {isPending: false, isLoggedIn: true, firstName, lastName, email, address}
+      payload: {isPending: false, isLoggedIn: true, firstName, lastName, email, address, phoneNumber}
     });
-
+    // navigate to the main page
+    history.push('/');
   } catch (error) {
     dispatch({
       type: `${USER_CONSTANTS.SIGN_IN}/${SHARED_CONSTANTS.FAILURE}`,
@@ -23,22 +28,21 @@ const logIn = (dispatch) => async (email, password) => {
   }
 };
 
-const logOut = (dispatch) => async ({email}) => {
+const logOut = (dispatch) => async () => {
   try {
     dispatch({
       type: `${USER_CONSTANTS.LOG_OUT}/${SHARED_CONSTANTS.REQUEST}`,
       payload: {isPending: true, isLoggedIn: true}
     });
 
-    // TODO make call to the backend
-
-    await simulateLogout(email);
+    await userService.logout();
 
     dispatch({
       type: `${USER_CONSTANTS.LOG_OUT}/${SHARED_CONSTANTS.SUCCESS}`,
       payload: {isPending: false, isLoggedIn: false}
     });
-
+    // navigate to the login page
+    history.push('/log-in');
   } catch (error) {
     dispatch({
       type: `${USER_CONSTANTS.LOG_OUT}/${SHARED_CONSTANTS.FAILURE}`,
@@ -47,24 +51,31 @@ const logOut = (dispatch) => async ({email}) => {
   }
 };
 
-function simulateLogin(email, password) {
-  return new Promise((resolve, reject) => {
-    resolve({
-      firstName: 'Vasyl',
-      lastName: 'Kharchenko',
-      email: 'wasya243@gmai.com',
-      address: 'Smilyanska steet'
+const signUp = (dispatch) => async (user) => {
+  try {
+    dispatch({
+      type: `${USER_CONSTANTS.SIGN_UP}/${SHARED_CONSTANTS.REQUEST}`,
+      payload: {isPending: true}
     });
-  });
-}
 
-function simulateLogout(email) {
-  return new Promise((resolve, reject) => {
-    resolve();
-  });
-}
+    const {firstName, lastName, email, address, phoneNumber} = await userService.register(user);
+
+    dispatch({
+      type: `${USER_CONSTANTS.SIGN_UP}/${SHARED_CONSTANTS.SUCCESS}`,
+      payload: {isPending: false, firstName, lastName, email, address, phoneNumber}
+    });
+    // navigate to the login page
+    history.push('/log-in');
+  } catch (error) {
+    dispatch({
+      type: `${USER_CONSTANTS.SIGN_UP}/${SHARED_CONSTANTS.FAILURE}`,
+      payload: {isPending: false}
+    });
+  }
+};
 
 export const userActions = {
   logIn,
-  logOut
+  logOut,
+  signUp
 };

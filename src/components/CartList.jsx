@@ -8,11 +8,11 @@ const CartList = ({listOfDrugs, removeFromCart}) => {
 
   return (
     listOfDrugs.map((drug, i) => <CartCard
-      key={i}
-      drug={drug}
-      removeFromCart={removeFromCart}
-      divider={i < length - 1}
-    />
+        key={i}
+        drug={drug}
+        removeFromCart={removeFromCart}
+        divider={i < length - 1}
+      />
     )
   );
 };

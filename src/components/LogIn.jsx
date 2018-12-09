@@ -30,12 +30,12 @@ export default class Login extends Component {
   handleChange = event => {
     const {validateInput} = validation;
     const {value, name} = event.target;
-    const toSet = validateInput(value, validation.validators[name].validator);
+    const toSet = validateInput(value, validation.validators[ name ].validator);
     this.setState({
-      [name]: value,
+      [ name ]: value,
       validation: {
         ...this.state.validation,
-        [name]: toSet
+        [ name ]: toSet
       }
     });
 

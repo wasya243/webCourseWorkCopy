@@ -7,7 +7,8 @@ const initialState = {
     firstName: null,
     lastName: null,
     email: null,
-    address: null
+    address: null,
+    phoneNumber: null
   }
 };
 
@@ -51,6 +52,37 @@ export default (state = initialState, action) => {
     const {isPending, isLoggedIn} = action.payload;
     state = {...state, isPending, isLoggedIn};
 
+  } else if (type === `${USER_CONSTANTS.SIGN_UP}/${SHARED_CONSTANTS.REQUEST}`) {
+
+    const {isPending} = action.payload;
+
+    state = {
+      ...state,
+      isPending
+    };
+
+  } else if (type === `${USER_CONSTANTS.SIGN_UP}/${SHARED_CONSTANTS.SUCCESS}`) {
+
+    // TODO: clarify whether or not we should set user info into state after registration
+    const {isPending, firstName, lastName, address, email} = action.payload;
+
+    state = {
+      ...state,
+      isPending,
+      // firstName,
+      // lastName,
+      // address,
+      // email
+    };
+
+  } else if (type === `${USER_CONSTANTS.SIGN_UP}/${SHARED_CONSTANTS.FAILURE}`) {
+
+    const {isPending} = action.payload;
+
+    state = {
+      ...state,
+      isPending
+    };
   }
 
   return state;

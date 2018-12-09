@@ -3,16 +3,16 @@ import {Route, Switch} from 'react-router-dom';
 
 import Home from '../containers/Home';
 import LogInPage from '../containers/LogInPage';
-import SignUp from './SignUp';
+import SignUpPage from '../containers/SignUpPage';
 
 const Main = () => (
-    <main>
-        <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route path="/log-in" component={LogInPage}/>
-            <Route path="/sign-up" component={SignUp}/>
-        </Switch>
-    </main>
+  <main>
+    <Switch>
+      <Route exact path="/" component={Home}/>
+      <Route path="/log-in" component={LogInPage}/>
+      <Route path="/sign-up" component={SignUpPage}/>
+    </Switch>
+  </main>
 );
 
 export default Main;
