@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {Router} from 'react-router-dom';
+import {PersistGate} from 'redux-persist/integration/react';
 
 // reactstrap requires bootstrap for its elements to be styled
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,15 +18,17 @@ import App from './App';
 import createStore from './store';
 import {history} from './_helpers/history';
 
-const store = createStore();
+const {store, persistor} = createStore();
 
 library.add(faShoppingCart);
 
 ReactDOM.render(
-  <Router history={history}>
-    <Provider store={store}>
-      <App/>
-    </Provider>
-  </Router>,
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <Router history={history}>
+        <App/>
+      </Router>
+    </PersistGate>
+  </Provider>,
   document.getElementById('root')
 );
