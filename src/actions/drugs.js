@@ -21,6 +21,26 @@ const fetchDrugs = (dispatch) => async () => {
   }
 };
 
+const fetchDrugsByCategory = (dispatch) => async (categoryId) => {
+  try {
+    dispatch({
+      type: `${DRUGS_CONSTANTS.GET_DRUGS_BY_CATEGORY}/${SHARED_CONSTANTS.REQUEST}`,
+      payload: {isPending: true}
+    });
+    const listOfDrugsByCategory = await drugService.getDrugByCategory(categoryId);
+    dispatch({
+      type: `${DRUGS_CONSTANTS.GET_DRUGS_BY_CATEGORY}/${SHARED_CONSTANTS.SUCCESS}`,
+      payload: {isPending: false, listOfDrugsByCategory}
+    });
+  } catch (error) {
+    dispatch({
+      type: `${DRUGS_CONSTANTS.GET_DRUGS_BY_CATEGORY}/${SHARED_CONSTANTS.FAILURE}`,
+      payload: {isPending: false}
+    });
+  }
+};
+
 export const drugsActions = {
-  fetchDrugs
+  fetchDrugs,
+  fetchDrugsByCategory
 };

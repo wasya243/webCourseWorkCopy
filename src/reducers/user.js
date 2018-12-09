@@ -1,7 +1,7 @@
 import {USER_CONSTANTS, SHARED_CONSTANTS} from '../constants';
 
 const initialState = {
-  isPending: true,
+  isPending: false,
   isLoggedIn: false,
   userInfo: {
     firstName: null,

@@ -4,9 +4,8 @@ const config = {
   apiUrl: 'http://localhost:3000/v1'
 };
 
-export const drugService = {
+export const categoryService = {
   getAll,
-  getDrugByCategory
 };
 
 
@@ -15,15 +14,7 @@ function getAll() {
     method: 'GET'
   };
 
-  return fetch(`${config.apiUrl}/drugs`, requestOptions).then(handleResponse);
-}
-
-function getDrugByCategory(categoryId) {
-  const requestOptions = {
-    method: 'GET'
-  };
-
-  return fetch(`${config.apiUrl}/categories/${categoryId}/drugs`, requestOptions).then(handleResponse);
+  return fetch(`${config.apiUrl}/categories`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

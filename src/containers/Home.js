@@ -4,12 +4,13 @@ import {Card, Container} from 'semantic-ui-react';
 import Loader from 'react-loader-spinner'
 
 import DrugsList from '../components/DrugsList';
-import {drugsActions, cartActions} from '../actions';
+import {drugsActions, cartActions, categoryActions} from '../actions';
 
 class Home extends Component {
 
   componentDidMount() {
     this.props.fetchDrugs();
+    this.props.fetchCategories();
   }
 
   onAddToCart = (drug) => {
@@ -31,15 +32,17 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = ({drugs}) => {
+const mapStateToProps = ({drugs, category}) => {
   return ({
     isPending: drugs.isPending,
-    listOfDrugs: drugs.items
+    listOfDrugs: drugs.items,
+    listOfCategories: category.items
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
   fetchDrugs: drugsActions.fetchDrugs(dispatch),
+  fetchCategories: categoryActions.fetchCategories(dispatch),
   addToCart: cartActions.addToCart(dispatch)
 });
 

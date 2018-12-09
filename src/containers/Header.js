@@ -15,10 +15,11 @@ import {
   NavbarBrand
 } from 'reactstrap';
 
-import {cartActions, userActions} from '../actions';
+import {cartActions, userActions, drugsActions} from '../actions';
 
 import UserInfo from '../components/UserInfo';
 import ModalExample from '../components/CartModal';
+import Category from "../components/Category";
 
 const loggedInMenu = (logoutHandler) => (
   <DropdownMenu right>
@@ -67,62 +68,75 @@ class Header extends Component {
     this.props.removeFromCart(drugToRemove)
   };
 
+  fetchDrugsByCategory = (categoryId) => {
+    this.props.fetchDrugsByCategory(categoryId);
+  };
+
   render() {
     const {isOpened} = this.state;
-    const {totalSum, items, logout, isLoggedIn, userInfo} = this.props;
+    const {totalSum, items, logout, isLoggedIn, userInfo, categories} = this.props;
 
     return (
-      <Navbar color="light" light expand="md">
-        <NavbarBrand>
+      <div>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand>
+            {
+              isLoggedIn
+                ? <UserInfo userInfo={userInfo}/>
+                : <span className="user-info">Неавторизованный пользователь</span>
+            }
+          </NavbarBrand>
+          <NavbarToggler onClick={this.setIsOpened}/>
+          <Collapse isOpen={isOpened} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink>
+                  <ModalExample
+                    cartSize={items.length}
+                    items={items}
+                    totalSum={totalSum}
+                    removeFromCart={this.removeFromCart}
+                  />
+                </NavLink>
+              </NavItem>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Личный кабинет
+                </DropdownToggle>
+                {
+                  isLoggedIn
+                    ? loggedInMenu(() => logout(userInfo.email))
+                    : notLoggedInMenu()
+                }
+              </UncontrolledDropdown>
+            </Nav>
+          </Collapse>
+        </Navbar>
+        <div className="menu">
           {
-            isLoggedIn
-            ? <UserInfo userInfo={userInfo} />
-            : <span className="user-info">Неавторизованный пользователь</span>
+            categories && <Category categories={categories} fetchDrugsByCategory={this.fetchDrugsByCategory}/>
           }
-        </NavbarBrand>
-        <NavbarToggler onClick={this.setIsOpened}/>
-        <Collapse isOpen={isOpened} navbar>
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink>
-                <ModalExample
-                  cartSize={items.length}
-                  items={items}
-                  totalSum={totalSum}
-                  removeFromCart={this.removeFromCart}
-                />
-              </NavLink>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Личный кабинет
-              </DropdownToggle>
-              {
-                isLoggedIn
-                  ? loggedInMenu(() => logout(userInfo.email))
-                  : notLoggedInMenu()
-              }
-            </UncontrolledDropdown>
-          </Nav>
-        </Collapse>
-      </Navbar>
+        </div>
+      </div>
     );
   }
 }
 
-const mapStateToProps = ({cart, user}) => {
+const mapStateToProps = ({cart, user, category}) => {
   return ({
     totalSum: cart.totalSum,
     items: cart.items,
     isLoggedIn: user.isLoggedIn,
-    userInfo: user.userInfo
+    userInfo: user.userInfo,
+    categories: category.items
   });
 };
 
 const mapDispatchToProps = (dispatch) => {
   return ({
     removeFromCart: cartActions.removeFromCart(dispatch),
-    logout: userActions.logOut(dispatch)
+    logout: userActions.logOut(dispatch),
+    fetchDrugsByCategory: drugsActions.fetchDrugsByCategory(dispatch)
   })
 };
 
