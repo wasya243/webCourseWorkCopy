@@ -31,6 +31,24 @@
     }
 }
 
+/* it is a bad way of doing it, but I don't have time*/
+.modal-content {
+    width: 150% !important;
+}
+
+.product-quantity-button {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    transition: all ease .3s;
+    text-align: center;
+    font-weight: bold;
+    line-height: 30px;
+    cursor: pointer;
+}
+
 .pointer {
     cursor: pointer;
 }

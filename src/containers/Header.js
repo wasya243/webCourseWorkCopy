@@ -68,6 +68,14 @@ class Header extends Component {
     this.props.removeFromCart(drugToRemove)
   };
 
+  addToCartByIncrement = (drugToAdd) => {
+    this.props.addToCartByIncrement(drugToAdd);
+  };
+
+  removeFromCartByDecrement = (drugToRemove) => {
+    this.props.removeFromCartByDecrement(drugToRemove);
+  };
+
   fetchDrugsByCategory = (categoryId) => {
     this.props.fetchDrugsByCategory(categoryId);
   };
@@ -96,6 +104,8 @@ class Header extends Component {
                     items={items}
                     totalSum={totalSum}
                     removeFromCart={this.removeFromCart}
+                    addToCartByIncrement={this.addToCartByIncrement}
+                    removeFromCartByDecrement={this.removeFromCartByDecrement}
                   />
                 </NavLink>
               </NavItem>
@@ -135,6 +145,8 @@ const mapStateToProps = ({cart, user, category}) => {
 const mapDispatchToProps = (dispatch) => {
   return ({
     removeFromCart: cartActions.removeFromCart(dispatch),
+    removeFromCartByDecrement: cartActions.removeFromCartByDecrement(dispatch),
+    addToCartByIncrement: cartActions.addToCartByIncrement(dispatch),
     logout: userActions.logOut(dispatch),
     fetchDrugsByCategory: drugsActions.fetchDrugsByCategory(dispatch)
   })

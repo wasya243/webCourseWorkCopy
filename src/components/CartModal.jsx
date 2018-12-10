@@ -31,7 +31,7 @@ class ModalExample extends React.Component {
 
   render() {
 
-    const {cartSize, totalSum, items, removeFromCart} = this.props;
+    const {cartSize, totalSum, items, removeFromCart, addToCartByIncrement, removeFromCartByDecrement} = this.props;
     const roundedTotalSum = Number(totalSum).toFixed(2);
 
     return (
@@ -44,7 +44,12 @@ class ModalExample extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
           <ModalHeader toggle={this.toggleModal}>Корзина</ModalHeader>
           <ModalBody>
-            <CartList listOfDrugs={items} removeFromCart={removeFromCart}/>
+            <CartList
+              listOfDrugs={items}
+              removeFromCart={removeFromCart}
+              addToCartByIncrement={addToCartByIncrement}
+              removeFromCartByDecrement={removeFromCartByDecrement}
+            />
           </ModalBody>
           <ModalFooter>
             <Button id="TooltipExample" color="primary" onClick={this.toggleModal}>Оформление покупки</Button>{' '}
