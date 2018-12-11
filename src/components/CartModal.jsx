@@ -23,6 +23,13 @@ class ModalExample extends React.Component {
     });
   }
 
+  createOrder = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
+    this.props.createOrder();
+  };
+
   toggleToolTip() {
     this.setState({
       toolTip: !this.state.toolTip
@@ -31,7 +38,16 @@ class ModalExample extends React.Component {
 
   render() {
 
-    const {cartSize, totalSum, items, removeFromCart, addToCartByIncrement, removeFromCartByDecrement, isLoggedIn} = this.props;
+    const {
+      cartSize,
+      totalSum,
+      items,
+      removeFromCart,
+      addToCartByIncrement,
+      removeFromCartByDecrement,
+      isLoggedIn
+    } = this.props;
+
     const roundedTotalSum = Number(totalSum).toFixed(2);
 
     return (
@@ -53,7 +69,7 @@ class ModalExample extends React.Component {
           </ModalBody>
           <ModalFooter>
             <div id="TooltipExample" className="p-3">
-              <Button disabled={!isLoggedIn} color="primary" onClick={this.toggleModal}>Оформление покупки</Button>{' '}
+              <Button disabled={!isLoggedIn} color="primary" onClick={this.createOrder}>Оформление покупки</Button>{' '}
             </div>
             <Tooltip placement="top-end" isOpen={this.state.toolTip} target="TooltipExample"
                      toggle={this.toggleToolTip}>

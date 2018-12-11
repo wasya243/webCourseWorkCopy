@@ -1,5 +1,5 @@
 import {SHARED_CONSTANTS} from '../constants';
-import {CART_CONSTANTS} from '../constants';
+import {CART_CONSTANTS, ORDER_CONSTANTS} from '../constants';
 
 const initialState = {
   isPending: false,
@@ -10,6 +10,10 @@ const initialState = {
 export default (state = initialState, action) => {
 
   const {type} = action;
+
+  if(type === `${ORDER_CONSTANTS.CREATE_ORDER}/${SHARED_CONSTANTS.SUCCESS}`) {
+    state = {...state, totalSum: 0, items: []}
+  }
 
   if (type === `${CART_CONSTANTS.ADD_TO_CART}/${SHARED_CONSTANTS.REQUEST}`) {
 

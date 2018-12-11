@@ -15,7 +15,7 @@ import {
   NavbarBrand
 } from 'reactstrap';
 
-import {cartActions, userActions, drugsActions} from '../actions';
+import {cartActions, userActions, drugsActions, orderActions} from '../actions';
 
 import UserInfo from '../components/UserInfo';
 import ModalExample from '../components/CartModal';
@@ -80,6 +80,14 @@ class Header extends Component {
     this.props.fetchDrugsByCategory(categoryId);
   };
 
+  createOrder = () => {
+    // prepare data for the backend
+    const orderInfo = {drugs: prepareCartItems(this.props.items)};
+    console.log(orderInfo);
+    // send data to the backend
+    this.props.createOrder(orderInfo);
+  };
+
   render() {
     const {isOpened} = this.state;
     const {totalSum, items, logout, isLoggedIn, userInfo, categories} = this.props;
@@ -107,6 +115,7 @@ class Header extends Component {
                     addToCartByIncrement={this.addToCartByIncrement}
                     removeFromCartByDecrement={this.removeFromCartByDecrement}
                     isLoggedIn={isLoggedIn}
+                    createOrder={this.createOrder}
                   />
                 </NavLink>
               </NavItem>
@@ -136,6 +145,7 @@ class Header extends Component {
 const mapStateToProps = ({cart, user, category}) => {
   return ({
     totalSum: cart.totalSum,
+    // TODO: rename items to cart items
     items: cart.items,
     isLoggedIn: user.isLoggedIn,
     userInfo: user.userInfo,
@@ -149,8 +159,16 @@ const mapDispatchToProps = (dispatch) => {
     removeFromCartByDecrement: cartActions.removeFromCartByDecrement(dispatch),
     addToCartByIncrement: cartActions.addToCartByIncrement(dispatch),
     logout: userActions.logOut(dispatch),
-    fetchDrugsByCategory: drugsActions.fetchDrugsByCategory(dispatch)
+    fetchDrugsByCategory: drugsActions.fetchDrugsByCategory(dispatch),
+    createOrder: orderActions.createOrder(dispatch)
   })
 };
+
+// TODO: move this function elsewhere + thing of more optimized way of doing it
+function prepareCartItems(cartItems) {
+  return cartItems.map(item => {
+    return {_id: item.drug._id, amountOfDrugs: item.amountOfDrugs}
+  });
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
