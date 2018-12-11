@@ -7,6 +7,7 @@ const OrderCart = (props) => {
   // { totalPrice: number, createdAt: Date
   // items: [ { drug: {name: string, manufacturer: string, price: string, logoUrl: string}, quantity: number } ] }
   // TODO: rework this, 'cause I don't have time to do this the right way
+  // TODO: add styling
   const {order} = props;
 
   return (
@@ -21,7 +22,7 @@ const OrderCart = (props) => {
         order.items.map(item =>
           <Row>
             <Col md={2}><Image src={item.drug.logoUrl}/></Col>
-            <Col md={2}>{item.drug.name}</Col>
+            <Col md={3}>{item.drug.name}</Col>
             <Col md={2}><Icon name="rub"/>&nbsp;{item.drug.price}</Col>
             <Col md={2}>{item.quantity}</Col>
             <Col md={2}><Icon name="rub"/>&nbsp;{item.drug.price * item.quantity}</Col>
