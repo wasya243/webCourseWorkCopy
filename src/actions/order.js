@@ -20,8 +20,7 @@ const createOrder = (dispatch) => async (orderInfo) => {
       type: `${ORDER_CONSTANTS.CREATE_ORDER}/${SHARED_CONSTANTS.FAILURE}`,
       payload: {isPending: false}
     });
-    // TODO: return back alert service
-    // dispatch(alertActions.error(error.toString()));
+    dispatch(alertActions.error(error.toString()));
   }
 };
 
@@ -41,8 +40,7 @@ const getOrdersByUser = (dispatch) => async (userId) => {
       type: `${ORDER_CONSTANTS.GET_ORDERS_BY_USER}/${SHARED_CONSTANTS.FAILURE}`,
       payload: {isPending: false}
     });
-    // TODO: return back alert service
-    // dispatch(alertActions.error(error.toString()));
+    dispatch(alertActions.error(error.toString()));
   }
 };
 
