@@ -4,6 +4,7 @@ import {Route, Switch} from 'react-router-dom';
 import Home from '../containers/Home';
 import LogInPage from '../containers/LogInPage';
 import SignUpPage from '../containers/SignUpPage';
+import OrdersPage from '../containers/OrdersPage';
 // import Category from "./Category";
 
 const Main = (props) => (
@@ -11,6 +12,7 @@ const Main = (props) => (
     <Switch>
       <Route exact path="/" component={Home}/>
       <Route path="/log-in" component={LogInPage}/>
+      <Route path="/orders" component={OrdersPage}/>
       <Route path="/sign-up" component={SignUpPage}/>
     </Switch>
   </main>

@@ -13,11 +13,11 @@ const logIn = (dispatch) => async (email, password) => {
     });
 
     const {userInfo} = await userService.login(email, password);
-    const {firstName, lastName, address, phoneNumber} = userInfo;
+    const {firstName, lastName, address, phoneNumber, _id} = userInfo;
 
     dispatch({
       type: `${USER_CONSTANTS.SIGN_IN}/${SHARED_CONSTANTS.SUCCESS}`,
-      payload: {isPending: false, isLoggedIn: true, firstName, lastName, email, address, phoneNumber}
+      payload: {isPending: false, isLoggedIn: true, firstName, lastName, email, address, phoneNumber, id: _id}
     });
     // navigate to the main page
     history.push('/');

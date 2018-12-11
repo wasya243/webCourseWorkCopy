@@ -22,7 +22,7 @@ function createOrder(orderInfo) {
 
 function getOrdersByUser(userId) {
   const requestOptions = {
-    method: 'POST',
+    method: 'GET',
     headers: authHeader()
   };
 

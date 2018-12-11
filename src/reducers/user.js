@@ -4,6 +4,7 @@ const initialState = {
   isPending: false,
   isLoggedIn: false,
   userInfo: {
+    id: null,
     firstName: null,
     lastName: null,
     email: null,
@@ -21,8 +22,8 @@ export default (state = initialState, action) => {
 
   } else if (type === `${USER_CONSTANTS.SIGN_IN}/${SHARED_CONSTANTS.SUCCESS}`) {
 
-    const {isPending, isLoggedIn, firstName, lastName, email, address} = action.payload;
-    state = {...state, isPending, isLoggedIn, userInfo: {firstName, lastName, email, address}};
+    const {isPending, isLoggedIn, firstName, lastName, email, address, id} = action.payload;
+    state = {...state, isPending, isLoggedIn, userInfo: {firstName, lastName, email, address, id}};
 
   } else if (type === `${USER_CONSTANTS.SIGN_IN}/${SHARED_CONSTANTS.FAILURE}`) {
 
