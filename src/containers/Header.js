@@ -106,6 +106,7 @@ class Header extends Component {
                     removeFromCart={this.removeFromCart}
                     addToCartByIncrement={this.addToCartByIncrement}
                     removeFromCartByDecrement={this.removeFromCartByDecrement}
+                    isLoggedIn={isLoggedIn}
                   />
                 </NavLink>
               </NavItem>

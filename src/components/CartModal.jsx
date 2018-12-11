@@ -31,7 +31,7 @@ class ModalExample extends React.Component {
 
   render() {
 
-    const {cartSize, totalSum, items, removeFromCart, addToCartByIncrement, removeFromCartByDecrement} = this.props;
+    const {cartSize, totalSum, items, removeFromCart, addToCartByIncrement, removeFromCartByDecrement, isLoggedIn} = this.props;
     const roundedTotalSum = Number(totalSum).toFixed(2);
 
     return (
@@ -52,7 +52,9 @@ class ModalExample extends React.Component {
             />
           </ModalBody>
           <ModalFooter>
-            <Button id="TooltipExample" color="primary" onClick={this.toggleModal}>Оформление покупки</Button>{' '}
+            <div id="TooltipExample" className="p-3">
+              <Button disabled={!isLoggedIn} color="primary" onClick={this.toggleModal}>Оформление покупки</Button>{' '}
+            </div>
             <Tooltip placement="top-end" isOpen={this.state.toolTip} target="TooltipExample"
                      toggle={this.toggleToolTip}>
               Только авторизированные пользователи могу совершать покупки
