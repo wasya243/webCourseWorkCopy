@@ -7,7 +7,7 @@ const OrderCart = (props) => {
   // { totalPrice: number, createdAt: Date
   // items: [ { drug: {name: string, manufacturer: string, price: string, logoUrl: string}, quantity: number } ] }
   // TODO: rework this, 'cause I don't have time to do this the right way
-  // TODO: add styling
+  // TODO: add styling, 'cause I don't have time to do this the right way
   const {order} = props;
 
   return (
